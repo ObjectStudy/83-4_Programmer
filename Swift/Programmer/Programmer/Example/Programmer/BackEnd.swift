@@ -8,6 +8,32 @@
 
 import Foundation
 
+
+protocol HasProgrammer {
+    
+}
+protocol Programmer: HasProgrammer {
+    associatedtype T: Paper
+//    Programmer는 Director에게 Paper를 제공 받아
+    // Program으로 모델링 하는 메소드가 필요하다.
+    func setData(paper: T)
+    func makeProgram() -> Program
+}
+
+// 중복이 있었던 코드는 여기에서 일괄적으로 처리한다.
+extension Programmer {
+    func getProgram(paper: T) -> Program {
+//        paper.setData(programmer: self)
+        /*
+         부모 자식간 통신할 경우에도 헐리우드 원칙을 지켜야
+         부모에 여파가 없다.
+         */
+        setData(paper: paper)
+        return makeProgram()
+    }
+}
+
+
 protocol BackEnd: Programmer {
     var server: Server? { get }
     var language: Language? { get }
@@ -18,3 +44,30 @@ extension BackEnd {
         return Program()
     }
 }
+
+class ABackEnd: BackEnd {
+    var server: Server?
+    
+    var language: Language?
+    
+    typealias T = Paper
+    
+    func setData(paper: ABackEnd.T) {
+        
+    }
+}
+
+//class BackEnd<T>: Programmer where T: Paper {
+//    func setData(paper: T) {
+//
+//    }
+//
+//    var server: Server?
+//    var language: Language?
+//}
+//
+//extension BackEnd {
+//    func makeProgram() -> Program {
+//        return Program()
+//    }
+//}

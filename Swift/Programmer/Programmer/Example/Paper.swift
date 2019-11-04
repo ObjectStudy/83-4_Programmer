@@ -8,9 +8,3 @@
 
 import Foundation
 
-protocol Paper {
-//    associatedtype T: Programmer
-//    func setData(programmer: T)
-    
-    func run() -> [Program]
-}

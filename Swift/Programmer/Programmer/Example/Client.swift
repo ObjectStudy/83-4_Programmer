@@ -8,6 +8,14 @@
 
 import Foundation
 
+protocol Paper {
+//    associatedtype T: Programmer
+//    func setData(programmer: T)
+    
+//    func run() -> [Program]
+}
+
+
 protocol Client: Paper {
     var library: Library? { get }
     var language: Language? { get }

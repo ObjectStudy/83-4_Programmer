@@ -13,7 +13,7 @@ protocol HasProgrammer {
     
 }
 protocol Programmer: HasProgrammer {
-    associatedtype T: Paper
+    associatedtype T
 //    Programmer는 Director에게 Paper를 제공 받아
     // Program으로 모델링 하는 메소드가 필요하다.
     func setData(paper: T)
@@ -33,7 +33,6 @@ extension Programmer {
     }
 }
 
-
 protocol BackEnd: Programmer {
     var server: Server? { get }
     var language: Language? { get }
@@ -45,16 +44,13 @@ extension BackEnd {
     }
 }
 
-class ABackEnd: BackEnd {
+class ABackEnd<T: Paper>: BackEnd {
+
     var server: Server?
     
     var language: Language?
-    
-    typealias T = Paper
-    
-    func setData(paper: ABackEnd.T) {
-        
-    }
+
+    func setData(paper: T) { }
 }
 
 //class BackEnd<T>: Programmer where T: Paper {
